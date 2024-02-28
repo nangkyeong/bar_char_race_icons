@@ -22,7 +22,7 @@ def get_image_label(root_folder,name):
     path = os.path.join(root_folder , name)
     #im = plt.imread(path)
     img = Image.open(path)
-    img.thumbnail((200,200),Image.LANCZOS)
+    img.thumbnail((200,200))
     return img
 
 def get_image_name(col_name):
@@ -394,8 +394,8 @@ class _BarChartRace(CommonChart):
         ax.grid(True, axis='x', color='#D3DCE6', linewidth=5, zorder=0)
 
         # ax.tick_params(labelsize=self.tick_label_font['size'], length=0, pad=2)
-        ax.tick_params(axis='x', length=12, labelsize=self.tick_label_font['size'], pad=1, color='#F8FAFF')
-        ax.tick_params(axis='y', length=12, labelsize=self.tick_label_font['size'], pad=1, color='#ffffff00')
+        ax.tick_params(axis='x', length=12, labelsize=self.tick_label_font['size'], pad=2, color='#F8FAFF')
+        ax.tick_params(axis='y', length=12, labelsize=self.tick_label_font['size'], pad=2, color='#ffffff00')
         ax.set_facecolor('#F8FAFF')
 
         ax.minorticks_off()
@@ -575,7 +575,7 @@ class _BarChartRace(CommonChart):
             else:
                 zipped = zip(bar_location, bar_length)
 
-            delta = .05 if self.bar_textposition == 'outside' else -.008
+            delta = .07 if self.bar_textposition == 'outside' else -.008
 
             text_objs = []
             for x1, y1 in zipped:
