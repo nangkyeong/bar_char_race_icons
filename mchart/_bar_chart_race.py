@@ -22,7 +22,7 @@ def get_image_label(root_folder,name):
     path = os.path.join(root_folder , name)
     #im = plt.imread(path)
     img = Image.open(path)
-    img.thumbnail((200,200),Image.ANTIALIAS)
+    img.thumbnail((200,200),Image.LANCZOS)
     return img
 
 def get_image_name(col_name):
@@ -541,7 +541,8 @@ class _BarChartRace(CommonChart):
 
     def add_period_label(self, ax, i):
         if self.period_label:
-            if self.period_template:
+            # if self.period_template:
+            if False:
                 idx_val = self.df_values.index[i]
                 if self.df_values.index.dtype.kind == 'M':
                     s = idx_val.strftime(self.period_template)
@@ -676,8 +677,7 @@ class _BarChartRace(CommonChart):
                 ret_val = anim.save(self.filename, fps=self.fps, writer=self.writer, 
                                     savefig_kwargs=savefig_kwargs) 
         except Exception as e:
-            message = str(e)
-            raise Exception(message)
+            raise e
         finally:
             plt.rcParams = self.orig_rcParams
 
