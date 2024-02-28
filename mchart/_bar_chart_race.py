@@ -50,7 +50,7 @@ class _BarChartRace(CommonChart):
     def __init__(self, df, filename, orientation, sort, n_bars, fixed_order, fixed_max,
                  steps_per_period, period_length, end_period_pause, interpolate_period, 
                  period_label, period_template, period_summary_func, perpendicular_bar_func, 
-                 colors, title, bar_size, bar_textposition, bar_texttemplate, bar_label_font, 
+                 colors, title, bar_size, bar_textposition, bar_texttemplate, bar_label_font, bar_label_padding,
                  tick_label_font, tick_template, shared_fontdict, scale, fig, writer, 
                  bar_kwargs, fig_kwargs, filter_column_colors, 
                  img_label_folder,tick_label_mode,tick_image_mode):
@@ -73,6 +73,7 @@ class _BarChartRace(CommonChart):
         self.bar_size = bar_size
         self.bar_textposition = bar_textposition
         self.bar_texttemplate = bar_texttemplate
+        self.bar_label_padding = bar_label_padding
         self.bar_label_font = self.get_font(bar_label_font)
         self.tick_label_font = self.get_font(tick_label_font, True)
         self.tick_template = self.get_tick_template(tick_template)
@@ -575,7 +576,10 @@ class _BarChartRace(CommonChart):
             else:
                 zipped = zip(bar_location, bar_length)
 
-            delta = .07 if self.bar_textposition == 'outside' else -.008
+            if self.bar_label_padding is None:
+                delta = .07 if self.bar_textposition == 'outside' else -.008
+            else:
+                delta = self.bar_label_padding
 
             text_objs = []
             for x1, y1 in zipped:
@@ -690,7 +694,7 @@ def bar_chart_race(df, filename=None, orientation='h', sort='desc', n_bars=None,
                    period_label=True, period_template=None, period_summary_func=None,
                    perpendicular_bar_func=None, colors=None, title=None, bar_size=.95,
                    bar_textposition='outside', bar_texttemplate='{x:,.0f}',
-                   bar_label_font=None, tick_label_font=None, tick_template='{x:,.0f}',
+                   bar_label_font=None, bar_label_padding=None, tick_label_font=None, tick_template='{x:,.0f}',
                    shared_fontdict=None, scale='linear', fig=None, writer=None, bar_kwargs=None, 
                    fig_kwargs=None, filter_column_colors=False,
                    img_label_folder=None,tick_label_mode='image',tick_image_mode='trailing'):
@@ -1071,7 +1075,7 @@ def bar_chart_race(df, filename=None, orientation='h', sort='desc', n_bars=None,
                         steps_per_period, period_length, end_period_pause, interpolate_period, 
                         period_label, period_template, period_summary_func, perpendicular_bar_func,
                         colors, title, bar_size, bar_textposition, bar_texttemplate, 
-                        bar_label_font, tick_label_font, tick_template, shared_fontdict, scale, 
+                        bar_label_font, bar_label_padding, tick_label_font, tick_template, shared_fontdict, scale, 
                         fig, writer, bar_kwargs, fig_kwargs, filter_column_colors, 
                         img_label_folder,tick_label_mode,tick_image_mode)
     return bcr.make_animation()
