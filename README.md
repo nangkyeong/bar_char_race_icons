@@ -28,7 +28,7 @@ conda activate envname
 Install `bar_chart_race` using `pip`:
 
 ```
-pip install git+https://github.com/eveliogm/mchart.git@master
+pip install git+https://github.com/nangkyeong/bar_char_race_icons.git@main
 ```
 
 You also need to install
