@@ -557,7 +557,9 @@ class _BarChartRace(CommonChart):
 
             if len(ax.texts) == 0:
                 # first frame
-                ax.text(s=s, transform=ax.transAxes, **self.period_label)
+                _kwargs = {k: v for k, v in self.period_label.items() if k != 'line_break_sep'}
+                ax.text(s=s, transform=ax.transAxes, **_kwargs)
+                del _kwargs
             else:
                 ax.texts[0].set_text(s)
 
