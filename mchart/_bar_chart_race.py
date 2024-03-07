@@ -553,7 +553,7 @@ class _BarChartRace(CommonChart):
                 s = self.str_index[i]
 
             if 'line_break_sep' in self.period_label:
-                s = s.replce(self.period_label['line_break_sep'], '\n')
+                s = s.replace(self.period_label['line_break_sep'], '\n')
 
             if len(ax.texts) == 0:
                 # first frame
